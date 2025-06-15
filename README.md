@@ -23,28 +23,28 @@ After running this script, the converted file format is simply
 ```
 where `total_matches` is the sum of all the `1gram`'s `match_count`s.* However, the script also removes a lot of other data to increase relevance for keyboard layout generation and significantly reduce file size:
 1. `year,match_count,volume_count`s are removed if `year`<2000. 1-grams with no `match_count`s because of this operation are removed.
-  - My opinion is that character frequencies pre-2000 are largely irrelevant to typists of today (as of writing this, 2025).
+	- My opinion is that character frequencies pre-2000 are largely irrelevant to typists of today (as of writing this, 2025).
 2. `1gram`s containing non-ASCII characters, digits, and underscores are removed.
-  - Non-ASCII characters are uncommon enough in American English that I decided they'd be irrelevant for character frequencies, especially since most US keyboards can't type them.
-  - Digits within `1gram`s are almost always Optical Character Recognition (OCR) errors on Google's part. Their software misidentifies `O`s as `0`s, `l`s as `1`s, and so on.
-  - Removing 1-grams containing underscores is an overly-broad method of removing Speech Tags (detailed in the final section). I seem to have discovered that speechtagged 1-grams are subsets of non-speechtagged 1-grams, so they wouldn't be necessary to count separately.
+	- Non-ASCII characters are uncommon enough in American English that I decided they'd be irrelevant for character frequencies, especially since most US keyboards can't type them.
+	- Digits within `1gram`s are almost always Optical Character Recognition (OCR) errors on Google's part. Their software misidentifies `O`s as `0`s, `l`s as `1`s, and so on.
+	- Removing 1-grams containing underscores is an overly-broad method of removing Speech Tags (detailed in the final section). I seem to have discovered that speechtagged 1-grams are subsets of non-speechtagged 1-grams, so they wouldn't be necessary to count separately.
 3. `1gram`s not containing letters are removed.
-  - justification
+	- justification
 4. `year`s and `volume_count`s are removed, and all the remaining `match_count`s for each `1gram` are summed to `total_matches`.
 5. All letters in `1gram`s are lowercased, and duplicates are combined into one 1-gram with their `total_matches` summed.
-  - justification
+	- justification
 6. All 1-grams are sorted.
 
 ## Instructions (WIP)
 0. Download [Python](https://www.python.org/downloads/).
 1. Download all the compressed corpus files from [American English V20200217 1-grams](https://storage.googleapis.com/books/ngrams/books/20200217/eng-us/eng-us-1-ngrams_exports.html) EXCEPT "<u>Total counts for 1-grams</u>".
-  - To choose another corpus, go to [Google Books Ngram Viewer Exports V3](https://storage.googleapis.com/books/ngrams/books/datasetsv3.html)--but this will almost certainly require modification of the script to get something usable and useful.
+	- To choose another corpus, go to [Google Books Ngram Viewer Exports V3](https://storage.googleapis.com/books/ngrams/books/datasetsv3.html)--but this will almost certainly require modification of the script to get something usable and useful.
 2. Extract all the compressed corpus files.
 3. Create a single NEW, EMPTY folder anywhere convenient, such as your Documents or Desktop. Place all the extracted corpus files in it.
-  - DO NOT PUT ANYTHING OTHER THAN THE CORPUS FILES IN THIS FOLDER. This script iterates on all untyped files in that folder, and is highly destructive.
+	- DO NOT PUT ANYTHING OTHER THAN THE CORPUS FILES IN THIS FOLDER. This script iterates on all untyped files in that folder, and is highly destructive.
 4. Download [NgramViewerExportsEnUSv3converter.py]().
 5. Open your command prompt / terminal / powershell and run `cd ` to whatever path you stored the *script*. Then, run `python NgramViewerExportsEnUSv3converter.py`.
-  - The script will ask you to input the path of the folder you put the corpus files in. DO NOT USE THIS SCRIPT ON ANY OTHER FOLDER. Again, this script iterates on all untyped files in that folder, and is highly destructive.
+	- The script will ask you to input the path of the folder you put the corpus files in. DO NOT USE THIS SCRIPT ON ANY OTHER FOLDER. Again, this script iterates on all untyped files in that folder, and is highly destructive.
 6. Watch it go! It'll take a while.
 
 When the script is finished running, you'll end up with a corpus <1% the size of the original files.
