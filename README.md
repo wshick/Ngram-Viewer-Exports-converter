@@ -10,7 +10,7 @@ What I may refer to as a "1-gram" is really
 ```
 as defined in Google's V3 corpora, where
 - `1gram` = 1 "word" (consecutive non-whitespace characters),
-  - *Google's usage of "-gram" as "word" is less common than the typical usage of "-gram" as "character".*
+	- *Google's usage of "-gram" as "word" is less common than the typical usage of "-gram" as "character".*
 - `match_count` = number of `1gram` occurrences per year, and
 - `volume_count` = number of sources `1gram` occurred in per year.
 
